@@ -4,13 +4,15 @@
 #include <ESP8266mDNS.h>
 
 /*-------------CONFIG--------------------*/
-const char*  WIFI_SSID      = "****";
-const char*  WIFI_Password  = "****";
-const String Relay_Password = "****";
+const char*  WIFI_SSID      = "ASUS_D2";
+const char*  WIFI_Password  = "794613852";
+const String Relay_Password = "123";
 const int    Relay_PIN      = 16;
 /*-------------CONFIG--------------------*/
 
 ESP8266WebServer server(80);
+
+String State = "OFF";
 
 void setup(void) {
   pinMode(Relay_PIN, OUTPUT);
@@ -55,12 +57,17 @@ void handleRoot() {
 
     if(server.arg(0) == Relay_Password) {
        if(server.arg(1) == "ON") {
-           server.send(200, "text/plain", "ON");
+           State = "ON";
+           server.send(200, "text/plain", State);
            digitalWrite(Relay_PIN, HIGH);
        }
        else if(server.arg(1) == "OFF") {
-           server.send(200, "text/plain", "OFF");
+           State = "OFF";
+           server.send(200, "text/plain", State);
            digitalWrite(Relay_PIN, LOW);
+       }
+       else if(server.arg(1) == "STATE") {
+           server.send(200, "text/plain", State);
        }
        else {
            server.send(200, "text/plain", "UNKNOWN_COMMAND");
