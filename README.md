@@ -4,7 +4,7 @@
 #include <ESP8266mDNS.h>
 
 /*-------------CONFIG--------------------*/
-const char*  WIFI_SSID      = "ASUS_D2";
+const char*  WIFI_SSID      = "Arpinet-27259";
 const char*  WIFI_Password  = "dav55533343";
 const String Relay_Password = "123";
 const int    Relay_PIN      = 16;
